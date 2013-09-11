@@ -6,12 +6,12 @@ import com.stocktrackr.db.StocksDataSource;
 import com.stocktrackr.model.Stock;
 
 import android.os.Bundle;
-import android.app.Activity;
+import android.app.ListActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.ArrayAdapter;
 
-public class MainActivity extends Activity {
+public class MainActivity extends ListActivity {
 	
 	public static final String LOGTAG = "STOCKSDB";
 	
@@ -33,7 +33,7 @@ public class MainActivity extends Activity {
 		}
 		
 		ArrayAdapter<Stock> adapter = new ArrayAdapter<Stock>(this, android.R.layout.simple_list_item_1, stocks);
-		//setListAdapter(adapter);
+		setListAdapter(adapter);
 	}
 
 	@Override
