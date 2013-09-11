@@ -18,6 +18,8 @@
 		E671914A17DFB9B0009240D9 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E671914917DFB9B0009240D9 /* Default-568h@2x.png */; };
 		E671914D17DFB9B0009240D9 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E671914B17DFB9B0009240D9 /* MainStoryboard.storyboard */; };
 		E671915017DFB9B0009240D9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E671914F17DFB9B0009240D9 /* ViewController.m */; };
+		E680550617E1376700F8CB13 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E680550517E1376700F8CB13 /* libsqlite3.dylib */; };
+		E680550917E1386300F8CB13 /* Stock.m in Sources */ = {isa = PBXBuildFile; fileRef = E680550817E1386300F8CB13 /* Stock.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +39,9 @@
 		E671914C17DFB9B0009240D9 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		E671914E17DFB9B0009240D9 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		E671914F17DFB9B0009240D9 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		E680550517E1376700F8CB13 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		E680550717E1385300F8CB13 /* Stock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stock.h; sourceTree = "<group>"; };
+		E680550817E1386300F8CB13 /* Stock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Stock.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E680550617E1376700F8CB13 /* libsqlite3.dylib in Frameworks */,
 				E671913417DFB9B0009240D9 /* UIKit.framework in Frameworks */,
 				E671913617DFB9B0009240D9 /* Foundation.framework in Frameworks */,
 				E671913817DFB9B0009240D9 /* CoreGraphics.framework in Frameworks */,
@@ -83,6 +89,9 @@
 		E671913917DFB9B0009240D9 /* StockTrackr_iOSPortion */ = {
 			isa = PBXGroup;
 			children = (
+				E680550517E1376700F8CB13 /* libsqlite3.dylib */,
+				E680550817E1386300F8CB13 /* Stock.m */,
+				E680550717E1385300F8CB13 /* Stock.h */,
 				E671914217DFB9B0009240D9 /* AppDelegate.h */,
 				E671914317DFB9B0009240D9 /* AppDelegate.m */,
 				E671914B17DFB9B0009240D9 /* MainStoryboard.storyboard */,
@@ -176,6 +185,7 @@
 				E671914017DFB9B0009240D9 /* main.m in Sources */,
 				E671914417DFB9B0009240D9 /* AppDelegate.m in Sources */,
 				E671915017DFB9B0009240D9 /* ViewController.m in Sources */,
+				E680550917E1386300F8CB13 /* Stock.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,6 +308,7 @@
 				E671915517DFB9B0009240D9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
