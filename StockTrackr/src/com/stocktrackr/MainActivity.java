@@ -2,36 +2,37 @@ package com.stocktrackr;
 
 import java.util.List;
 
-import com.stocktrackr.db.StocksDBOpenHelper;
+import com.stocktrackr.db.StocksDataSource;
 import com.stocktrackr.model.Stock;
-import com.stocktrackr.xml.StocksPullParser;
-
 import android.os.Bundle;
 import android.app.ListActivity;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import android.view.Menu;
 import android.widget.ArrayAdapter;
 
 public class MainActivity extends ListActivity {
 	
 	public static final String LOGTAG = "STOCKSDB";
+
 	
-	SQLiteOpenHelper dbHelper;
-	SQLiteDatabase database;
-	
-	//StocksDataSource datasource;
+	StocksDataSource datasource;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		StocksPullParser parser = new StocksPullParser();
-		List<Stock> stocks = parser.parseXML(this);
+		//StocksPullParser parser = new StocksPullParser();
+		//List<Stock> stocks = parser.parseXML(this);
 		
-		dbHelper = new StocksDBOpenHelper(this);
-		database = dbHelper.getWritableDatabase();
+		datasource = new StocksDataSource(this);
+		datasource.open();
+		
+		List<Stock> stocks = datasource.findAll();
+		if(stocks.size() == 0){
+			createData();
+			stocks = datasource.findAll();
+		}
 		
 		ArrayAdapter<Stock> adapter = new ArrayAdapter<Stock>(this, android.R.layout.simple_list_item_1, stocks);
 		setListAdapter(adapter);
@@ -44,8 +45,19 @@ public class MainActivity extends ListActivity {
 		return true;
 	}
 	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		datasource.open();
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		datasource.close();
+	}
 
-	/*private void createData(){
+	private void createData(){
 		Stock stock = new Stock();
 		stock.setName("Apple Inc");
 		stock.setSymbol("AAPL");
@@ -90,7 +102,7 @@ public class MainActivity extends ListActivity {
 		stock.setVolume(1816606);
 		stock = datasource.create(stock);
 		Log.i(LOGTAG, "Stock created with id " + stock.getId());
-		
-	}*/
+	
+	}
 
 }

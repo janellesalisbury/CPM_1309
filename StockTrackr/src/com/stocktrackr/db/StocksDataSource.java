@@ -64,11 +64,13 @@ public class StocksDataSource {
 		if(cursor.getCount() > 0){
 			while(cursor.moveToNext()){
 				Stock stock = new Stock();
-				stock.setId(cursor.getLong(cursor.getColumnIndex(StocksDBOpenHelper.COLUMN_ID)));
+				//stock.setId(cursor.getLong(cursor.getColumnIndex(StocksDBOpenHelper.COLUMN_ID)));
 				stock.setName(cursor.getString(cursor.getColumnIndex(StocksDBOpenHelper.COLUMN_NAME)));
 				stock.setSymbol(cursor.getString(cursor.getColumnIndex(StocksDBOpenHelper.COLUMN_SYMBOL)));
+				stock.setLastPrice(cursor.getDouble(cursor.getColumnIndex(StocksDBOpenHelper.COLUMN_LPRICE)));
 				stock.setChange(cursor.getDouble(cursor.getColumnIndex(StocksDBOpenHelper.COLUMN_CHANGE)));
 				stock.setVolume(cursor.getInt(cursor.getColumnIndex(StocksDBOpenHelper.COLUMN_VOLUME)));
+				stocks.add(stock);
 			}
 		}
 		return stocks;
