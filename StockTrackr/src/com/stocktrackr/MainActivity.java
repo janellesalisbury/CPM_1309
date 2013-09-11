@@ -2,11 +2,13 @@ package com.stocktrackr;
 
 import com.stocktrackr.db.StocksDBOpenHelper;
 import com.stocktrackr.db.StocksDataSource;
+import com.stocktrackr.model.Stock;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import android.view.Menu;
 
 public class MainActivity extends Activity {
@@ -44,6 +46,54 @@ public class MainActivity extends Activity {
 	protected void onPause() {
 		super.onPause();
 		datasource.close();
+	}
+	
+	private void createData(){
+		Stock stock = new Stock();
+		stock.setName("Apple Inc");
+		stock.setSymbol("AAPL");
+		stock.setLastPrice(487.115);
+		stock.setChange(-0.100999999999999);
+		stock.setVolume(568074);
+		stock = datasource.create(stock);
+		Log.i(LOGTAG, "Stock created with id " + stock.getId());
+		
+	    stock = new Stock();
+		stock.setName("Bank of America Corp");
+		stock.setSymbol("BAC");
+		stock.setLastPrice(14.115);
+		stock.setChange(-0.00499999999999901);
+		stock.setVolume(4378773);
+		stock = datasource.create(stock);
+		Log.i(LOGTAG, "Stock created with id " + stock.getId());
+		
+		stock = new Stock();
+		stock.setName("Facebook, Inc");
+		stock.setSymbol("FB");
+		stock.setLastPrice(41.31);
+		stock.setChange(0.0160000000000053);
+		stock.setVolume(3425912);
+		stock = datasource.create(stock);
+		Log.i(LOGTAG, "Stock created with id " + stock.getId());
+		
+		stock = new Stock();
+		stock.setName("General Motors Co");
+		stock.setSymbol("GM");
+		stock.setLastPrice(23.1);
+		stock.setChange(-0.0399999999999991);
+		stock.setVolume(2786454);
+		stock = datasource.create(stock);
+		Log.i(LOGTAG, "Stock created with id " + stock.getId());
+		
+		stock = new Stock();
+		stock.setName("Sirius SM Radio Inc");
+		stock.setSymbol("SIRI");
+		stock.setLastPrice(3.58);
+		stock.setChange(-0.0499999999999998);
+		stock.setVolume(1816606);
+		stock = datasource.create(stock);
+		Log.i(LOGTAG, "Stock created with id " + stock.getId());
+		
 	}
 
 }

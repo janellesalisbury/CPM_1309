@@ -5,8 +5,8 @@ public class Stock {
 	private long id;
 	private String name;
 	private String symbol;
-	private float lastPrice;
-	private float change;
+	private double lastPrice;
+	private double change;
 	private int volume;
 	
 	public long getId(){
@@ -33,19 +33,19 @@ public class Stock {
 		this.symbol = symbol;
 	}
 	
-	public float getLastPrice(){
+	public double getLastPrice(){
 		return lastPrice;
 	}
 	
-	public void setLastPrice(float lastPrice){
+	public void setLastPrice(double lastPrice){
 		this.lastPrice = lastPrice;
 	}
 	
-	public float getChange(){
+	public double getChange(){
 		return change;
 	}
 	
-	public void setChange(float change){
+	public void setChange(double change){
 		this.change = change;
 	}
 	
