@@ -1,5 +1,7 @@
 package com.stocktrackr.model;
 
+import java.text.NumberFormat;
+
 public class Stock {
 	
 	private long id;
@@ -55,6 +57,11 @@ public class Stock {
 	
 	public void setVolume(int volume){
 		this.volume = volume;
+	}
+	
+	public String toString(){
+		NumberFormat nf = NumberFormat.getCurrencyInstance();
+		return name + "\n(" + nf.format(lastPrice) + ")";
 	}
 	
 	

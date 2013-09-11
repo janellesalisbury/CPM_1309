@@ -7,7 +7,6 @@ import com.stocktrackr.model.Stock;
 
 import android.os.Bundle;
 import android.app.ListActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.widget.ArrayAdapter;
 
@@ -22,15 +21,8 @@ public class MainActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		//database stuff
-		datasource = new StocksDataSource(this);
-		datasource.open();
-		
-		List<Stock>stocks = datasource.findAll();
-		if(stocks.size() == 0){
-			createData();
-			stocks = datasource.findAll();
-		}
+		StocksPullParser parser = new StocksPullParser();
+		List<Stock> stocks = parser.parseXML(this);
 		
 		ArrayAdapter<Stock> adapter = new ArrayAdapter<Stock>(this, android.R.layout.simple_list_item_1, stocks);
 		setListAdapter(adapter);
@@ -43,19 +35,8 @@ public class MainActivity extends ListActivity {
 		return true;
 	}
 	
-	@Override
-	protected void onResume() {
-		super.onResume();
-		datasource.open();
-	}
-	
-	@Override
-	protected void onPause() {
-		super.onPause();
-		datasource.close();
-	}
-	
-	private void createData(){
+
+	/*private void createData(){
 		Stock stock = new Stock();
 		stock.setName("Apple Inc");
 		stock.setSymbol("AAPL");
@@ -101,6 +82,6 @@ public class MainActivity extends ListActivity {
 		stock = datasource.create(stock);
 		Log.i(LOGTAG, "Stock created with id " + stock.getId());
 		
-	}
+	}*/
 
 }
