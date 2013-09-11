@@ -2,12 +2,14 @@ package com.stocktrackr;
 
 import java.util.List;
 
-import com.stocktrackr.db.StocksDataSource;
+import com.stocktrackr.db.StocksDBOpenHelper;
 import com.stocktrackr.model.Stock;
-import com.stocktrackr.xml.StocksJDOMParser;
+import com.stocktrackr.xml.StocksPullParser;
 
 import android.os.Bundle;
 import android.app.ListActivity;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.view.Menu;
 import android.widget.ArrayAdapter;
 
@@ -15,16 +17,21 @@ public class MainActivity extends ListActivity {
 	
 	public static final String LOGTAG = "STOCKSDB";
 	
-	StocksDataSource datasource;
+	SQLiteOpenHelper dbHelper;
+	SQLiteDatabase database;
+	
+	//StocksDataSource datasource;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		//StocksPullParser parser = new StocksPullParser();
-		StocksJDOMParser parser = new StocksJDOMParser();
+		StocksPullParser parser = new StocksPullParser();
 		List<Stock> stocks = parser.parseXML(this);
+		
+		dbHelper = new StocksDBOpenHelper(this);
+		database = dbHelper.getWritableDatabase();
 		
 		ArrayAdapter<Stock> adapter = new ArrayAdapter<Stock>(this, android.R.layout.simple_list_item_1, stocks);
 		setListAdapter(adapter);
