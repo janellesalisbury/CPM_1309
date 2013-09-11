@@ -1,5 +1,8 @@
 package com.stocktrackr.db;
 
+import com.stocktrackr.model.Stock;
+
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -25,5 +28,19 @@ public class StocksDataSource {
 		Log.i(LOGTAG, "Database Closed");
 		dbHelper.close();
 	}
+	
+	public Stock create(Stock stock){
+		ContentValues values = new ContentValues();
+		values.put(StocksDBOpenHelper.COLUMN_NAME, stock.getName());
+		values.put(StocksDBOpenHelper.COLUMN_SYMBOL, stock.getSymbol());
+		values.put(StocksDBOpenHelper.COLUMN_LPRICE, stock.getLastPrice());
+		values.put(StocksDBOpenHelper.COLUMN_CHANGE, stock.getChange());
+		values.put(StocksDBOpenHelper.COLUMN_VOLUME, stock.getVolume());
+		
+		long insertid = database.insert(StocksDBOpenHelper.TABLE_STOCKS, null, values);
+		stock.setId(insertid);
+		return stock;
+	}
+	
 
 }

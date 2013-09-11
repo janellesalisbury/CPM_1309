@@ -1,6 +1,7 @@
 package com.stocktrackr;
 
 import com.stocktrackr.db.StocksDBOpenHelper;
+import com.stocktrackr.db.StocksDataSource;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -12,8 +13,7 @@ public class MainActivity extends Activity {
 	
 	public static final String LOGTAG = "STOCKSDB";
 	
-	SQLiteOpenHelper dbHelper;
-	SQLiteDatabase database;
+	StocksDataSource datasource;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -21,8 +21,7 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		
 		//database stuff
-		dbHelper = new StocksDBOpenHelper(this);
-		database = dbHelper.getWritableDatabase();
+		datasource = new StocksDataSource(this);
 		
 		//ArrayAdapter<Stock> adapter = new ArrayAdapter<Stock>(this, android.R.layout.simple_list_item_1, stocks);
 		//setListAdapter(adapter);
@@ -33,6 +32,18 @@ public class MainActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_main, menu);
 		return true;
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		datasource.open();
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		datasource.close();
 	}
 
 }

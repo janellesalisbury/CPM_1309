@@ -12,17 +12,19 @@ public class StocksDBOpenHelper extends SQLiteOpenHelper {
 	private static final String DATABASE_NAME = "stocks.db";
 	private static final int DATABASE_VERSION = 1;
 
-	private static final String TABLE_STOCKS = "stocks";
-	private static final String COLUMN_ID = "stockID";
-	private static final String COLUMN_NAME = "name";
-	private static final String COLUMN_LPRICE = "lastPrice";
-	private static final String COLUMN_CHANGE = "change";
-	private static final String COLUMN_VOLUME = "volume";
+	public static final String TABLE_STOCKS = "stocks";
+	public static final String COLUMN_ID = "stockID";
+	public static final String COLUMN_NAME = "name";
+	public static final String COLUMN_SYMBOL = "symbol";
+	public static final String COLUMN_LPRICE = "lastPrice";
+	public static final String COLUMN_CHANGE = "change";
+	public static final String COLUMN_VOLUME = "volume";
 
 	private static final String TABLE_CREATE = 
 	"CREATE TABLE " + TABLE_STOCKS + " (" +
-	COLUMN_ID + " TEXT PRIMARY KEY, " +
+	COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
 	COLUMN_NAME + " TEXT, " + 
+	COLUMN_SYMBOL + " TEXT, " +
 	COLUMN_LPRICE + " NUMERIC, " +
 	COLUMN_CHANGE + " NUMERIC, " +
 	COLUMN_VOLUME + " NUMERIC " + 
