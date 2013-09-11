@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.stocktrackr.db.StocksDataSource;
 import com.stocktrackr.model.Stock;
+import com.stocktrackr.xml.StocksJDOMParser;
 
 import android.os.Bundle;
 import android.app.ListActivity;
@@ -21,7 +22,8 @@ public class MainActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		StocksPullParser parser = new StocksPullParser();
+		//StocksPullParser parser = new StocksPullParser();
+		StocksJDOMParser parser = new StocksJDOMParser();
 		List<Stock> stocks = parser.parseXML(this);
 		
 		ArrayAdapter<Stock> adapter = new ArrayAdapter<Stock>(this, android.R.layout.simple_list_item_1, stocks);

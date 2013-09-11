@@ -1,4 +1,4 @@
-package com.stocktrackr;
+package com.stocktrackr.xml;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.res.Resources.NotFoundException;
 import android.util.Log;
 
+import com.stocktrackr.R;
 import com.stocktrackr.model.Stock;
 
 public class StocksPullParser {
