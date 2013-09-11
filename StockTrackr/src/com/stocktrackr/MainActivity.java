@@ -1,15 +1,15 @@
 package com.stocktrackr;
 
-import com.stocktrackr.db.StocksDBOpenHelper;
+import java.util.List;
+
 import com.stocktrackr.db.StocksDataSource;
 import com.stocktrackr.model.Stock;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.view.Menu;
+import android.widget.ArrayAdapter;
 
 public class MainActivity extends Activity {
 	
@@ -24,8 +24,15 @@ public class MainActivity extends Activity {
 		
 		//database stuff
 		datasource = new StocksDataSource(this);
+		datasource.open();
 		
-		//ArrayAdapter<Stock> adapter = new ArrayAdapter<Stock>(this, android.R.layout.simple_list_item_1, stocks);
+		List<Stock>stocks = datasource.findAll();
+		if(stocks.size() == 0){
+			createData();
+			stocks = datasource.findAll();
+		}
+		
+		ArrayAdapter<Stock> adapter = new ArrayAdapter<Stock>(this, android.R.layout.simple_list_item_1, stocks);
 		//setListAdapter(adapter);
 	}
 
