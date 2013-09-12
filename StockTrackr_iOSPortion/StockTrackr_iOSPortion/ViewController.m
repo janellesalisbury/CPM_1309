@@ -51,7 +51,7 @@
             //created successfully
             
             //CREATE TABLE STATEMENT
-            const char *sql_statement = "CREATE TABLE IF NOT EXISTS MOVIE_TABLE (ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, PRICE INTEGER)";
+            const char *sql_statement = "CREATE TABLE IF NOT EXISTS STOCKS_TABLE (ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, PRICE INTEGER)";
             char *error;
             if(sqlite3_exec(stockDB, sql_statement, NULL, NULL, &error) == SQLITE_OK)
             {
