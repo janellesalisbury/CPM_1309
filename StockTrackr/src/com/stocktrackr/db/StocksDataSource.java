@@ -55,12 +55,27 @@ public class StocksDataSource {
 	}
 	
 	public List<Stock> findAll(){
-		List<Stock> stocks = new ArrayList<Stock>();
-		
 		Cursor cursor = database.query(StocksDBOpenHelper.TABLE_STOCKS, allColumns,
 				null, null, null, null, null);
 		
 		Log.i(LOGTAG, "Returned " + cursor.getCount() + " rows");
+		List<Stock> stocks = cursorToList(cursor);
+		return stocks;			
+	}
+	
+	public List<Stock> findFiltered(String selection, String orderBy){
+		Cursor cursor = database.query(StocksDBOpenHelper.TABLE_STOCKS, allColumns,
+				selection, null, null, null, orderBy);
+		
+		Log.i(LOGTAG, "Returned " + cursor.getCount() + " rows");
+		List<Stock> stocks = cursorToList(cursor);
+		return stocks;
+				
+				
+	}
+
+	private List<Stock> cursorToList(Cursor cursor) {
+		List<Stock> stocks = new ArrayList<Stock>();
 		if(cursor.getCount() > 0){
 			while(cursor.moveToNext()){
 				Stock stock = new Stock();
@@ -74,8 +89,6 @@ public class StocksDataSource {
 			}
 		}
 		return stocks;
-				
-				
 	}
 	
 

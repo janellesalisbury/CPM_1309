@@ -4,5 +4,8 @@
     <string name="app_name">StockTrackr</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
+    <string name="menu_all">All</string>
+    <string name="menu_more">+100</string>
+    <string name="menu_less">-100</string>
 
 </resources>
