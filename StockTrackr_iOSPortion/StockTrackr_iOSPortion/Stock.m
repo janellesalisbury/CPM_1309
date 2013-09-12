@@ -8,31 +8,23 @@
 
 #import "Stock.h"
 
-@interface Stock ()
-
-@end
-
 @implementation Stock
+@synthesize _name, _stockID, _price;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+-(void)setName:(NSString *)name{
+    _name = name;
+}
+-(NSString*)getName{
+    return _name;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
+-(void)setPrice:(NSString *)price{
+    _price = price;
+}
+-(NSString*)getPrice{
+    return _price;
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 
 @end

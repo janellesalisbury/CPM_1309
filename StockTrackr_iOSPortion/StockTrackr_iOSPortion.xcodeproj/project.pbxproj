@@ -19,7 +19,7 @@
 		E671914D17DFB9B0009240D9 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E671914B17DFB9B0009240D9 /* MainStoryboard.storyboard */; };
 		E671915017DFB9B0009240D9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E671914F17DFB9B0009240D9 /* ViewController.m */; };
 		E680550617E1376700F8CB13 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E680550517E1376700F8CB13 /* libsqlite3.dylib */; };
-		E680550917E1386300F8CB13 /* Stock.m in Sources */ = {isa = PBXBuildFile; fileRef = E680550817E1386300F8CB13 /* Stock.m */; };
+		E680551017E13C6500F8CB13 /* Stock.m in Sources */ = {isa = PBXBuildFile; fileRef = E680550F17E13C6500F8CB13 /* Stock.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,8 +40,8 @@
 		E671914E17DFB9B0009240D9 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		E671914F17DFB9B0009240D9 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		E680550517E1376700F8CB13 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
-		E680550717E1385300F8CB13 /* Stock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stock.h; sourceTree = "<group>"; };
-		E680550817E1386300F8CB13 /* Stock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Stock.m; sourceTree = "<group>"; };
+		E680550C17E13B9700F8CB13 /* Stock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stock.h; sourceTree = "<group>"; };
+		E680550F17E13C6500F8CB13 /* Stock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Stock.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,8 +90,8 @@
 			isa = PBXGroup;
 			children = (
 				E680550517E1376700F8CB13 /* libsqlite3.dylib */,
-				E680550817E1386300F8CB13 /* Stock.m */,
-				E680550717E1385300F8CB13 /* Stock.h */,
+				E680550C17E13B9700F8CB13 /* Stock.h */,
+				E680550F17E13C6500F8CB13 /* Stock.m */,
 				E671914217DFB9B0009240D9 /* AppDelegate.h */,
 				E671914317DFB9B0009240D9 /* AppDelegate.m */,
 				E671914B17DFB9B0009240D9 /* MainStoryboard.storyboard */,
@@ -185,7 +185,7 @@
 				E671914017DFB9B0009240D9 /* main.m in Sources */,
 				E671914417DFB9B0009240D9 /* AppDelegate.m in Sources */,
 				E671915017DFB9B0009240D9 /* ViewController.m in Sources */,
-				E680550917E1386300F8CB13 /* Stock.m in Sources */,
+				E680551017E13C6500F8CB13 /* Stock.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
