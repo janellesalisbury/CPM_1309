@@ -30,10 +30,10 @@
     
     [super viewDidLoad];
     
-    
-    
+    stocks = [[NSMutableArray alloc]init];
     [[self stocksTableView]setDelegate:self];
     [[self stocksTableView]setDataSource:self];
+    [self openDB];
     
     
     NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
