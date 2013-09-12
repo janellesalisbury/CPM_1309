@@ -7,6 +7,9 @@
 //
 
 #import "ViewController.h"
+#import <sqlite3.h>
+
+
 @interface ViewController ()
 {
     NSMutableArray *stocks;
@@ -19,6 +22,7 @@
 @end
 
 @implementation ViewController
+@synthesize stocksTableView;
 
 
 - (void)viewDidLoad
@@ -59,6 +63,12 @@
         }
     }
     
+}
+-(void) openDB{
+    if (sqlite3_open([dbPathString UTF8String], &stockDB)==SQLITE_OK) {
+        sqlite3_close(stockDB);
+        
+    }
 }
 -(void) addStocks
 {
@@ -119,9 +129,9 @@
         
         if(sqlite3_prepare(stockDB, query_sql, -1, &stmt, NULL) ==SQLITE_OK){
             while (sqlite3_step(stmt) == SQLITE_ROW) {
-                NSString *title = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(stmt, 1)];
+                NSString *name = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(stmt, 1)];
                 
-                NSString *genre = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(stmt, 2)];
+                NSString *price = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(stmt, 2)];
                 
                 Stock *stock = [[Stock alloc]init];
                 [stock setName:name];
@@ -146,9 +156,9 @@
         
         if(sqlite3_prepare(stockDB, query_sql, -1, &stmt, NULL) ==SQLITE_OK){
             while (sqlite3_step(stmt) == SQLITE_ROW) {
-                NSString *title = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(stmt, 1)];
+                NSString *name = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(stmt, 1)];
                 
-                NSString *genre = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(stmt, 2)];
+                NSString *price = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(stmt, 2)];
                 
                 Stock *stock = [[Stock alloc]init];
                 [stock setName:name];
@@ -174,9 +184,9 @@
         
         if(sqlite3_prepare(stockDB, query_sql, -1, &stmt, NULL) ==SQLITE_OK){
             while (sqlite3_step(stmt) == SQLITE_ROW) {
-                NSString *title = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(stmt, 1)];
+                NSString *name = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(stmt, 1)];
                 
-                NSString *genre = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(stmt, 2)];
+                NSString *price = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(stmt, 2)];
                 
                 Stock *stock = [[Stock alloc]init];
                 [stock setName:name];
