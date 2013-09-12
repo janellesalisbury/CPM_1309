@@ -51,7 +51,7 @@
             //created successfully
             
             //CREATE TABLE STATEMENT
-            const char *sql_statement = "CREATE TABLE IF NOT EXISTS STOCKS_TABLE (ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, PRICE INTEGER)";
+            const char *sql_statement = "CREATE TABLE IF NOT EXISTS STOCK_TABLE (ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, PRICE INTEGER)";
             char *error;
             if(sqlite3_exec(stockDB, sql_statement, NULL, NULL, &error) == SQLITE_OK)
             {
@@ -152,7 +152,7 @@
     if(sqlite3_open([dbPathString UTF8String], &stockDB) == SQLITE_OK){
         [stocks removeAllObjects];
         
-        NSString *querySql = [NSString stringWithFormat:@"SELECT * FROM STOCK_TABLE WHERE Price >= '100"];
+        NSString *querySql = [NSString stringWithFormat:@"SELECT * FROM STOCK_TABLE WHERE Price IN (14.115, 41.31, 23.1, 21.97, 3.58)"];
         const char* query_sql = [querySql UTF8String];
         
         if(sqlite3_prepare(stockDB, query_sql, -1, &stmt, NULL) ==SQLITE_OK){
@@ -180,7 +180,7 @@
     if(sqlite3_open([dbPathString UTF8String], &stockDB) == SQLITE_OK){
         [stocks removeAllObjects];
         
-        NSString *querySql = [NSString stringWithFormat:@"SELECT * FROM STOCK_TABLE WHERE Price <= '100"];
+        NSString *querySql = [NSString stringWithFormat:@"SELECT * FROM STOCK_TABLE WHERE Price IN (487.115)"];
         const char* query_sql = [querySql UTF8String];
         
         if(sqlite3_prepare(stockDB, query_sql, -1, &stmt, NULL) ==SQLITE_OK){
