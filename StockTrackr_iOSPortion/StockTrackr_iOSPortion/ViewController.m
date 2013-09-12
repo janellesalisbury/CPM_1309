@@ -74,7 +74,7 @@
 {
     char *error;
     if(sqlite3_open([dbPathString UTF8String], &stockDB) == SQLITE_OK){
-        NSString *insertStmt = [NSString stringWithFormat:@"INSERT INTO STOCK_TABLE (NAME, PRICE) SELECT 'Apple, Inc' as NAME, '487.115' as 'PRICE' UNION SELECT 'Bank of America Corp', '14.115' UNION SELECT 'Facebook, Inc', '41.31' UNION SELECT 'General Electric Co', '23.1' UNION SELECT 'Intel Corp', '21.97' UNION SELECT 'Sirius XM Radio Inc', '3.58' "];
+        NSString *insertStmt = [NSString stringWithFormat:@"INSERT INTO STOCK_TABLE (NAME, PRICE) SELECT 'Apple, Inc' as NAME,  '487.115' as PRICE UNION SELECT 'Bank of America Corp', '14.115' UNION SELECT 'Facebook, Inc', '41.31' UNION SELECT 'General Electric Co', '23.1' UNION SELECT 'Intel Corp', '21.97' UNION SELECT 'Sirius XM Radio Inc', '3.58' "];
         
         const char *insert_stmt = [insertStmt UTF8String];
         
@@ -119,6 +119,7 @@
 }
 
 -(IBAction)allStocksButton:(id)sender{
+    NSLog(@"function ran");
     sqlite3_stmt *stmt;
     
     if(sqlite3_open([dbPathString UTF8String], &stockDB) == SQLITE_OK){
@@ -137,7 +138,7 @@
                 [stock setName:name];
                 [stock setPrice:price];
                 [stocks addObject:stock];
-                NSLog(@"function ran");
+                
             }
         }
     }
@@ -179,7 +180,7 @@
     if(sqlite3_open([dbPathString UTF8String], &stockDB) == SQLITE_OK){
         [stocks removeAllObjects];
         
-        NSString *querySql = [NSString stringWithFormat:@"SELECT * FROM MOVIE_TABLE WHERE Genre = 'Horror"];
+        NSString *querySql = [NSString stringWithFormat:@"SELECT * FROM STOCK_TABLE WHERE Price <= '100"];
         const char* query_sql = [querySql UTF8String];
         
         if(sqlite3_prepare(stockDB, query_sql, -1, &stmt, NULL) ==SQLITE_OK){
