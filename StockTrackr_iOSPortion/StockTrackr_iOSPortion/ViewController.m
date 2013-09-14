@@ -7,12 +7,18 @@
 //
 
 #import "ViewController.h"
+#import <QuartzCore/QuartzCore.h>
 #import <sqlite3.h>
 
 
 @interface ViewController ()
 {
     NSMutableArray *stocks;
+    NSMutableData *stockdata;
+    NSString *name;
+    NSString *lastPrice;
+    NSArray *data;
+    NSMutableArray *allStocks;
     sqlite3 *stockDB;
     NSString *dbPathString;
     const char *UTF8dbpath;
@@ -33,10 +39,18 @@
     stocks = [[NSMutableArray alloc]init];
     [[self stocksTableView]setDelegate:self];
     [[self stocksTableView]setDataSource:self];
-    [self openDB];
+    
+    NSURL *url = [NSURL URLWithString:@"https://www.dropbox.com/s/qjtfw7s34okx7wp/stocks.json"];
+    NSURLRequest *getURL = [NSURLRequest requestWithURL:url];
+    NSURLConnection *connectInternet = [[NSURLConnection alloc] initWithRequest:getURL delegate:self];
+    [connectInternet start];
+    
+    //[self openDB];
     
     
-    NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    
+    
+   /* NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     if(dirPaths !=nil)
     {
         NSString *docsDirectory = [dirPaths objectAtIndex:0];
@@ -58,21 +72,86 @@
                 
             }
             [self addStocks];
-            sqlite3_close(stockDB);
+            sqlite3_close(stockDB); 
             
         }
-    }
+    } */
     
 }
+
+-(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
+    stockdata = [[NSMutableData alloc] init];
+}
+
+-(void)connection:(NSURLConnection *) connection didReceiveData:(NSData *)data
+{
+    [stockdata appendData:data];
+}
+
+-(void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+    data = [NSJSONSerialization JSONObjectWithData:stockdata options:kNilOptions error:nil];
+    for (int i = 0; i< [stocks count]; i++) {
+        NSIndexPath *indexPath = [self.stocksTableView indexPathForSelectedRow];
+        name = [[data objectAtIndex:indexPath.row+i] objectForKey:@"name"];
+        if(!allStocks){
+            allStocks = [NSMutableArray array];
+        }
+        [allStocks addObject:name];
+        [allStocks addObject:lastPrice];
+    }
+    NSLog(@"%@", allStocks);
+    [stocksTableView reloadData];
+}
+
+-(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+    //failure message here
+}
+
+
 -(void) openDB{
     if (sqlite3_open([dbPathString UTF8String], &stockDB)==SQLITE_OK) {
         sqlite3_close(stockDB);
         
     }
 }
--(void) addStocks
+-(void) addStocks:(NSMutableDictionary *)dataDictionary
 {
-    char *error;
+    sqlite3_stmt *stmt;
+    sqlite3 *stocksdb;
+    
+    NSMutableString *insertString = [NSMutableString stringWithFormat:@"Insert into STOCKS_TABLE ("];
+    for (int i = 0; i<[[dataDictionary allKeys] count]; i++)
+    {
+        [insertString appendFormat:@"%@", [[dataDictionary allKeys] objectAtIndex:i]];
+        
+    }
+    [insertString appendFormat:@")values ("];
+    for (int i = 0; i<[[dataDictionary allKeys] count]; i++)
+    {
+        [insertString appendFormat:@"%@,",[dataDictionary valueForKey:[[dataDictionary allKeys] objectAtIndex:i]]];
+    }
+    [insertString appendFormat:@");"];
+    NSLog(@"qry:%@", insertString);
+    const char *sql = [insertString UTF8String];
+    
+    if((sqlite3_open([dbPathString UTF8String], &stockDB)== SQLITE_OK))
+    {
+        if(sqlite3_prepare((__bridge sqlite3 *)(dbPathString), sql, -1, &stmt, NULL) ==SQLITE_OK)
+        {
+            sqlite3_step(stmt);
+            sqlite3_finalize(stmt);
+        }
+        else
+        {
+            NSLog(@"Unsuccessful:%s", sqlite3_errmsg((__bridge sqlite3 *)(dbPathString)));
+        }
+        sqlite3_close(stockDB);
+    }
+    
+    /*char *error;
     if(sqlite3_open([dbPathString UTF8String], &stockDB) == SQLITE_OK){
         NSString *insertStmt = [NSString stringWithFormat:@"INSERT INTO STOCK_TABLE (NAME, PRICE) SELECT 'Apple, Inc' as NAME,  '487.115' as PRICE UNION SELECT 'Bank of America Corp', '14.115' UNION SELECT 'Facebook, Inc', '41.31' UNION SELECT 'General Electric Co', '23.1' UNION SELECT 'Intel Corp', '21.97' UNION SELECT 'Sirius XM Radio Inc', '3.58' "];
         
@@ -86,7 +165,8 @@
             
         }
         sqlite3_close(stockDB);
-    }
+    }*/
+    
 }
 
 
