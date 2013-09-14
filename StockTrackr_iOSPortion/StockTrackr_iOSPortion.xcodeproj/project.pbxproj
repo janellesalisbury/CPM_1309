@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E654DB4617E3E17F0087D49B /* Stocks.json in Resources */ = {isa = PBXBuildFile; fileRef = E654DB4517E3E17F0087D49B /* Stocks.json */; };
 		E671913417DFB9B0009240D9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E671913317DFB9B0009240D9 /* UIKit.framework */; };
 		E671913617DFB9B0009240D9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E671913517DFB9B0009240D9 /* Foundation.framework */; };
 		E671913817DFB9B0009240D9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E671913717DFB9B0009240D9 /* CoreGraphics.framework */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E654DB4517E3E17F0087D49B /* Stocks.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Stocks.json; sourceTree = "<group>"; };
 		E671913017DFB9B0009240D9 /* StockTrackr_iOSPortion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StockTrackr_iOSPortion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E671913317DFB9B0009240D9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E671913517DFB9B0009240D9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -98,6 +100,7 @@
 				E671914E17DFB9B0009240D9 /* ViewController.h */,
 				E671914F17DFB9B0009240D9 /* ViewController.m */,
 				E671913A17DFB9B0009240D9 /* Supporting Files */,
+				E654DB4517E3E17F0087D49B /* Stocks.json */,
 			);
 			path = StockTrackr_iOSPortion;
 			sourceTree = "<group>";
@@ -172,6 +175,7 @@
 				E671914817DFB9B0009240D9 /* Default@2x.png in Resources */,
 				E671914A17DFB9B0009240D9 /* Default-568h@2x.png in Resources */,
 				E671914D17DFB9B0009240D9 /* MainStoryboard.storyboard in Resources */,
+				E654DB4617E3E17F0087D49B /* Stocks.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
