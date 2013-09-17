@@ -10,13 +10,6 @@
 #import "Stock.h"
 #import <sqlite3.h>
 
-@interface ViewController : UIViewController <UITableViewDelegate, UITableViewDelegate>
-
-@property(strong, nonatomic) IBOutlet UITableView *stocksTableView;
-
--(IBAction)allStocksButton:(id)sender;
--(IBAction)lessThanButton:(id)sender;
--(IBAction)moreThanButton:(id)sender;
-
+@interface ViewController : UIViewController <UITableViewDelegate, UITableViewDelegate, NSURLConnectionDataDelegate>
 
 @end

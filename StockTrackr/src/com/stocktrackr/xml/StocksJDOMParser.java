@@ -19,7 +19,7 @@ import com.stocktrackr.model.Stock;
 public class StocksJDOMParser {
 	
 	private static final String LOGTAG = "STOCKSDB";
-
+	//create constants for each value, again used to identify what we are looking for and want to return
 	private static final String COLUMN_TAG = "stock";
 	private static final String COLUMN_NAME = "name";
 	private static final String COLUMN_SYMBOL = "symbol";
@@ -29,17 +29,20 @@ public class StocksJDOMParser {
 	
 
 	public List<Stock> parseXML(Context context) {
-
+		//Using an input stream use the current activity to open the stocks.xml file
 		InputStream stream = context.getResources().openRawResource(R.raw.stocks);
+		//Instead of using a DOM builder, we are using a SAX builder which is a 
+		//simpler approach using an api for xml. Streaming is used for the xml document, similar to the parser class.
 		SAXBuilder builder = new SAXBuilder();
+		//create the list of objects
 		List<Stock> stocks = new ArrayList<Stock>();
 
 		try {
-
+			//parse using a document object, returning an element and create a list of the instance of the class and pass the tags in
 			Document document = (Document) builder.build(stream);
 			org.jdom2.Element rootNode = document.getRootElement();
 			List<org.jdom2.Element> list = rootNode.getChildren(COLUMN_TAG);
-
+			//this for statement will loop through the list and parse the values for integer/doubles and take the text values
 			for (Element node : list) {
 				Stock stock = new Stock();
 				stock.setName(node.getChildText(COLUMN_NAME));
@@ -55,6 +58,7 @@ public class StocksJDOMParser {
 		} catch (JDOMException e) {
 			Log.i(LOGTAG, e.getMessage());
 		}
+		//return the objects here
 		return stocks;
 	}
 

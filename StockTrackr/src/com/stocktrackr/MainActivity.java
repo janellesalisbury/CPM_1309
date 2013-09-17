@@ -15,8 +15,10 @@ import android.widget.ArrayAdapter;
 public class MainActivity extends ListActivity {
 	
 	public static final String LOGTAG = "STOCKSDB";
+	//listview declaration
 	private List<Stock> stocks;
 	
+	//instance of the datasource class which hides the openHelper dealings within
 	StocksDataSource datasource;
 
 	@Override
@@ -24,16 +26,16 @@ public class MainActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-	
+		//instantiate the datasource class here
 		datasource = new StocksDataSource(this);
 		datasource.open();
-		
+		//create and retrieve the data here, if the app has already been run, there is no need to have it be recreated, it will just be read
 		stocks = datasource.findAll();
 		if(stocks.size() == 0){
 			createData();
 			stocks = datasource.findAll();
 		}
-		
+		//refresh the list
 		refreshDisplay();
 	}
 
@@ -46,15 +48,18 @@ public class MainActivity extends ListActivity {
 	
 	public boolean onOptionsItemSelected(MenuItem item){
 		switch (item.getItemId()){
+		//retrieve all of the data from the database and display it in the list when the all button is clicked
 		case R.id.menu_all:
 			stocks = datasource.findAll();
 			refreshDisplay();
 		break;
+		//retrieve data that is less that 100 dollars from the database and display it when the -100 button is clicked
 		case R.id.menu_less:
 			stocks = datasource.findFiltered("lastPrice <= 100", "lastPrice ASC");
 			refreshDisplay();
 		
 		break;
+		//retrieve data that is more than 100 dollars from the database and display it when the +100 button is clicked
 		case R.id.menu_more:
 			stocks = datasource.findFiltered("lastPrice >= 100", "lastPrice DESC");
 			refreshDisplay();
@@ -64,21 +69,24 @@ public class MainActivity extends ListActivity {
 			
 			break;
 		}
+		//return user selection
 		return super.onOptionsItemSelected(item);
 		
 	}
-	
+	//Use an arrayAdapter to bind the data objects to the list. The Stock class provides the data type here, it will be displayed
+	//as a simple list and will return the stocks objects read from the xml file and parser class, it will be displayed using the 
+	//toString method from the Stocks class.
 	public void refreshDisplay(){
 		ArrayAdapter<Stock> adapter = new ArrayAdapter<Stock>(this, android.R.layout.simple_list_item_1, stocks);
 		setListAdapter(adapter);
 	}
-	
+	//open the database when the activity comes to the screen.
 	@Override
 	protected void onResume() {
 		super.onResume();
 		datasource.open();
 	}
-	
+	//close the database when the activity is cancelled by pressing the back button or home button
 	@Override
 	protected void onPause() {
 		super.onPause();
@@ -86,9 +94,10 @@ public class MainActivity extends ListActivity {
 	}
 
 	private void createData(){
+		//read the xml source and return the objects, 
 		StocksPullParser parser = new StocksPullParser();
 		List<Stock> stocks = parser.parseXML(this);
-		
+		//loop through and create an object 
 		for(Stock stock : stocks){
 			datasource.create(stock);
 		}

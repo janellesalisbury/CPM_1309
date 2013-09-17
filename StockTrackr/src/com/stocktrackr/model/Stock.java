@@ -3,7 +3,7 @@ package com.stocktrackr.model;
 import java.text.NumberFormat;
 
 public class Stock {
-	
+	//Values to be saved into the database
 	private long id;
 	private String name;
 	private String symbol;
@@ -11,6 +11,7 @@ public class Stock {
 	private double change;
 	private int volume;
 	
+	//Getters and Setters for each value (to set the value and then return it)
 	public long getId(){
 		return id;
 	}
@@ -58,7 +59,7 @@ public class Stock {
 	public void setVolume(int volume){
 		this.volume = volume;
 	}
-	
+	//Return the name and last price of each stock 
 	public String toString(){
 		NumberFormat nf = NumberFormat.getCurrencyInstance();
 		return name + "\n(" + nf.format(lastPrice) + ")";

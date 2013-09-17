@@ -7,11 +7,30 @@
 //
 
 #import "AppDelegate.h"
+#import "XMLParser.h"
+#import "ViewController.h"
 
 @implementation AppDelegate
+@synthesize stockArray;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"stocks.xml"];
+    NSData *data = [[NSData alloc] initWithContentsOfFile:path];
+    NSXMLParser *xmlParser = [[NSXMLParser alloc] initWithData:data];
+    XMLParser *parser = [[XMLParser alloc] initXMLParser];
+    [xmlParser setDelegate: parser];
+    
+    BOOL parseSuccess = [xmlParser parse];
+    if(parseSuccess){
+        NSLog(@"Amount %i", [stockArray count]);
+    }
+    else{
+        NSLog(@"No Data");
+    }
+   
+    
     // Override point for customization after application launch.
     return YES;
 }
