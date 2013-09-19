@@ -5,7 +5,7 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add a new stock to the database here"
@@ -20,7 +20,7 @@
         android:text="Name:" />
 
     <EditText
-        android:id="@+id/editText1"
+        android:id="@+id/name_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10" >
@@ -37,7 +37,7 @@
         android:text="Symbol:" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/symbol_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10" />
@@ -51,7 +51,7 @@
         android:text="Last Price:" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/price_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -66,7 +66,7 @@
         android:text="Change:" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/change_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -81,7 +81,7 @@
         android:text="Volume:" />
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/volume_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -94,5 +94,11 @@
         android:gravity="left"
         android:paddingBottom="10dp"
         android:text="Save New Stock" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save to Local DB" />
 
 </LinearLayout>

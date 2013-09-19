@@ -2,28 +2,30 @@ package com.stocktrackr;
 
 import java.util.List;
 
+import com.stocktrackr.db.StocksDBOpenHelper;
 import com.stocktrackr.db.StocksDataSource;
 import com.stocktrackr.model.Stock;
 import com.stocktrackr.xml.StocksPullParser;
 import com.parse.Parse;
 import com.parse.ParseAnalytics;
-import com.parse.ParseObject;
-
 import android.os.Bundle;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 public class MainActivity extends ListActivity {
 	
 	public static final String LOGTAG = "STOCKSDB";
 	//listview declaration
 	private List<Stock> stocks;
+	ListView lv;
 	
 	//instance of the datasource class which hides the openHelper dealings within
 	StocksDataSource datasource;
+	StocksDBOpenHelper database;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +37,11 @@ public class MainActivity extends ListActivity {
 	    ParseAnalytics.trackAppOpened(getIntent());
 	    
 	    //TEST PARSE HERE
-	    ParseObject testObject = new ParseObject("TestObject");
-	    testObject.put("foo", "bar");
-	    testObject.saveInBackground();
-
+	    //ParseObject testObject = new ParseObject("TestObject");
+	    //testObject.put("foo", "bar");
+	    //testObject.saveInBackground();
+	    
+	    
 		//instantiate the datasource class here
 		datasource = new StocksDataSource(this);
 		datasource.open();
@@ -47,11 +50,13 @@ public class MainActivity extends ListActivity {
 		if(stocks.size() == 0){
 			createData();
 			stocks = datasource.findAll();
+			
 		}
 		//refresh the list
 		refreshDisplay();
 	}
 	
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
