@@ -1,5 +1,7 @@
 package com.stocktrackr;
 
+import java.security.acl.LastOwnerException;
+
 import com.parse.Parse;
 import com.parse.ParseAnalytics;
 import com.parse.ParseObject;
@@ -62,6 +64,8 @@ public class AddStockActivity extends Activity {
 	    ParseAnalytics.trackAppOpened(getIntent());
 	    setContentView(R.layout.add_stock_form);
 	    
+	    textInfo();
+	    /*
 	    Button localAdd = (Button) findViewById(R.id.button2);
 	    localAdd.setOnClickListener(new OnClickListener() {
 			
@@ -71,7 +75,7 @@ public class AddStockActivity extends Activity {
 				
 			}
 		});
-	    
+	    */
 	    //save stock button onclick listener
 	    Button addNew = (Button) findViewById(R.id.button1);
 		addNew.setOnClickListener(new OnClickListener() {
@@ -80,7 +84,7 @@ public class AddStockActivity extends Activity {
 			public void onClick(View v) {
 				
 				addToParseDB(nameInfo, symbolInfo, priceInfo, changeInfo, volumeInfo);
-				//addToParseDB(textInfo());
+				textInfo();
 				Intent back = new Intent(AddStockActivity.this, MainActivity.class);
 				startActivity(back);
 			
@@ -92,22 +96,25 @@ public class AddStockActivity extends Activity {
 		
 	    Name = (EditText) findViewById(R.id.name_et);
 		nameInfo = Name.getText().toString();
-		Log.i("your txt", nameInfo);
 	    Symbol = (EditText) findViewById(R.id.symbol_et);
 		symbolInfo = Symbol.getText().toString();
 		Price = (EditText) findViewById(R.id.price_et);
 		priceInfo = Price.getText().toString();
+		//int lastPrice = Integer.parseInt(priceInfo);
 		Change = (EditText) findViewById(R.id.change_et);
 		changeInfo = Change.getText().toString();
+		//int changes = Integer.parseInt(changeInfo);
 		Volume = (EditText) findViewById(R.id.volume_et);
 		volumeInfo = Volume.getText().toString();
+		//int vol = Integer.parseInt(volumeInfo);
 		
 			
 	}
 
 	//add stock to parse db
-	public void addToParseDB(String name, String symbol, String price, String change, String volume ){
+	public void addToParseDB(String name, String symbol, String price, String change, String volume){
 		ParseObject newStock = new ParseObject("StockObject");
+		Log.i("LOGTAG", "Stock" + nameInfo + "saved to Parse.com");
 		newStock.put("name", nameInfo);
 		newStock.put("symbol", symbolInfo);
 		newStock.put("price", priceInfo);
@@ -121,6 +128,7 @@ public class AddStockActivity extends Activity {
 	
 	//ADD A NEW STOCK TO LOCAL DB HERE, NOT WORKING
 	//create and add the stock to the database
+	/*
 	public Stock addToLocal(Stock newStock){
 		database = stocksDBOpenHelper.getWritableDatabase();
 		
@@ -139,7 +147,7 @@ public class AddStockActivity extends Activity {
 			
 	}
 	
-	
+	*/
 	}
 		
 

@@ -7,8 +7,13 @@ import com.stocktrackr.db.StocksDBOpenHelper;
 import com.stocktrackr.db.StocksDataSource;
 import com.stocktrackr.model.Stock;
 import com.stocktrackr.xml.StocksPullParser;
+import com.parse.FindCallback;
 import com.parse.Parse;
 import com.parse.ParseAnalytics;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
 import android.os.Bundle;
 import android.app.ListActivity;
 import android.content.Intent;
@@ -21,8 +26,8 @@ public class MainActivity extends ListActivity {
 	
 	public static final String LOGTAG = "STOCKSDB";
 	//listview declaration
-	private List<Stock> stocks;
-	ListView lv;
+	 private List<Stock> stocks;
+	
 	
 	//instance of the datasource class which hides the openHelper dealings within
 	StocksDataSource datasource;
@@ -38,7 +43,7 @@ public class MainActivity extends ListActivity {
 	    Parse.initialize(this, "KiyYVr2obq6sxKvo5nUOG8woHJZ7buip6Dvu29aJ", "z1wDwWrz3kOwP95hdORDl4Zfgt1RzZXTRupwPOph"); 
 	    ParseAnalytics.trackAppOpened(getIntent());
 	    
-	    //TEST PARSE HERE
+	    //TEST PARSE HERE... this works
 	    //ParseObject testObject = new ParseObject("TestObject");
 	    //testObject.put("foo", "bar");
 	    //testObject.saveInBackground();
@@ -47,7 +52,7 @@ public class MainActivity extends ListActivity {
 		//instantiate the datasource class here
 		datasource = new StocksDataSource(this);
 		datasource.open();
-		//instantiate change datasource for alternate filtering
+	
 		
 		//create and retrieve the data here, if the app has already been run, there is no need to have it be recreated, it will just be read
 		stocks = datasource.findAll();
@@ -60,8 +65,7 @@ public class MainActivity extends ListActivity {
 		refreshDisplay();
 	}
 	
-
-
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -106,7 +110,11 @@ public class MainActivity extends ListActivity {
 	public void refreshDisplay(){
 		ArrayAdapter<Stock> adapter = new ArrayAdapter<Stock>(this, android.R.layout.simple_list_item_1, stocks);
 		setListAdapter(adapter);
+
+	
 	}
+	
+	//
 	//open the database when the activity comes to the screen.
 	@Override
 	protected void onResume() {
@@ -130,5 +138,7 @@ public class MainActivity extends ListActivity {
 		}
 		
 	}
+	
+	
 
 }
