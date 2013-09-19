@@ -105,11 +105,11 @@ public class AddStockActivity extends Activity {
 	//add stock to parse db
 	public void addToParseDB(String nameInfo, String symbolInfo, String priceInfo, String changeInfo, String volumeInfo ){
 		ParseObject newStock = new ParseObject("Stock Object");
-		newStock.put("name", nameInfo);
-		newStock.put("symbol", symbolInfo);
-		newStock.put("price", priceInfo);
-		newStock.put("change", changeInfo);
-		newStock.put("volume", volumeInfo);
+		newStock.put("name", Name);
+		newStock.put("symbol", Symbol);
+		newStock.put("price", Price);
+		newStock.put("change", Change);
+		newStock.put("volume", Volume);
 		newStock.saveInBackground();
 		AddStockActivity.this.finish();
 	}

@@ -23,7 +23,7 @@
 	</stock>
 	<stock>
 		<name>General Electric Co</name>
-		<symbol>23.1</symbol>
+		<symbol>GE</symbol>
 		<lastPrice>23.1</lastPrice>
 		<change>-0.0399999999999991</change>
 		<volume>2786454</volume>
@@ -52,7 +52,7 @@
 	<stock>
 		<name>Google Inc</name>
 		<symbol>GOOG</symbol>
-		<lastPrice>3903.32</lastPrice>
+		<lastPrice>903.32</lastPrice>
 		<change>17.12</change>
 		<volume>1926978</volume>
 	</stock>
@@ -67,7 +67,7 @@
 		<name>Yahoo Inc</name>
 		<symbol>YHOO</symbol>
 		<lastPrice>30.43</lastPrice>
-		<change>15502569</change>
+		<change>0.94</change>
 		<volume>1816606</volume>
 	</stock>
 </stocks>

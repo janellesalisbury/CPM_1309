@@ -2,6 +2,7 @@ package com.stocktrackr;
 
 import java.util.List;
 
+import com.stocktrackr.db.ChangeDataSource;
 import com.stocktrackr.db.StocksDBOpenHelper;
 import com.stocktrackr.db.StocksDataSource;
 import com.stocktrackr.model.Stock;
@@ -25,6 +26,7 @@ public class MainActivity extends ListActivity {
 	
 	//instance of the datasource class which hides the openHelper dealings within
 	StocksDataSource datasource;
+	ChangeDataSource changeDS;
 	StocksDBOpenHelper database;
 
 	@Override
@@ -45,6 +47,8 @@ public class MainActivity extends ListActivity {
 		//instantiate the datasource class here
 		datasource = new StocksDataSource(this);
 		datasource.open();
+		//instantiate change datasource for alternate filtering
+		
 		//create and retrieve the data here, if the app has already been run, there is no need to have it be recreated, it will just be read
 		stocks = datasource.findAll();
 		if(stocks.size() == 0){
