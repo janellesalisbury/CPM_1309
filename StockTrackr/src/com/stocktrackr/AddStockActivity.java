@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -79,6 +80,7 @@ public class AddStockActivity extends Activity {
 			public void onClick(View v) {
 				
 				addToParseDB(nameInfo, symbolInfo, priceInfo, changeInfo, volumeInfo);
+				//addToParseDB(textInfo());
 				Intent back = new Intent(AddStockActivity.this, MainActivity.class);
 				startActivity(back);
 			
@@ -90,6 +92,7 @@ public class AddStockActivity extends Activity {
 		
 	    Name = (EditText) findViewById(R.id.name_et);
 		nameInfo = Name.getText().toString();
+		Log.i("your txt", nameInfo);
 	    Symbol = (EditText) findViewById(R.id.symbol_et);
 		symbolInfo = Symbol.getText().toString();
 		Price = (EditText) findViewById(R.id.price_et);
@@ -103,13 +106,13 @@ public class AddStockActivity extends Activity {
 	}
 
 	//add stock to parse db
-	public void addToParseDB(String nameInfo, String symbolInfo, String priceInfo, String changeInfo, String volumeInfo ){
-		ParseObject newStock = new ParseObject("Stock Object");
-		newStock.put("name", Name);
-		newStock.put("symbol", Symbol);
-		newStock.put("price", Price);
-		newStock.put("change", Change);
-		newStock.put("volume", Volume);
+	public void addToParseDB(String name, String symbol, String price, String change, String volume ){
+		ParseObject newStock = new ParseObject("StockObject");
+		newStock.put("name", nameInfo);
+		newStock.put("symbol", symbolInfo);
+		newStock.put("price", priceInfo);
+		newStock.put("change", changeInfo);
+		newStock.put("volume", volumeInfo);
 		newStock.saveInBackground();
 		AddStockActivity.this.finish();
 	}
