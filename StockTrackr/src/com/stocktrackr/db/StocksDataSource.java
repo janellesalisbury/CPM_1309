@@ -104,6 +104,11 @@ public class StocksDataSource {
 		//return the object
 		return stocks;
 	}
+	public void deleteObjects(){
+		database.execSQL("DROP TABLE IF EXISTS" + StocksDBOpenHelper.TABLE_STOCKS);
+		database.execSQL(StocksDBOpenHelper.TABLE_CREATE);
+		
+	}
 	
 	
 	

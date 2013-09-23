@@ -6,7 +6,6 @@ import com.stocktrackr.db.ChangeDataSource;
 import com.stocktrackr.db.StocksDBOpenHelper;
 import com.stocktrackr.db.StocksDataSource;
 import com.stocktrackr.model.Stock;
-import com.stocktrackr.xml.StocksPullParser;
 import com.parse.FindCallback;
 import com.parse.Parse;
 import com.parse.ParseAnalytics;
@@ -20,7 +19,6 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 public class MainActivity extends ListActivity {
 	
@@ -31,8 +29,8 @@ public class MainActivity extends ListActivity {
 	
 	//instance of the datasource class which hides the openHelper dealings within
 	StocksDataSource datasource;
-	ChangeDataSource changeDS;
 	StocksDBOpenHelper database;
+	ChangeDataSource changeDS;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +71,8 @@ public class MainActivity extends ListActivity {
 		return true;
 	}
 	
+	
+	
 	public boolean onOptionsItemSelected(MenuItem item){
 		switch (item.getItemId()){
 		//retrieve all of the data from the database and display it in the list when the all button is clicked
@@ -96,6 +96,9 @@ public class MainActivity extends ListActivity {
 			Intent addIntent = new Intent(MainActivity.this, AddStockActivity.class);
 			startActivity(addIntent);
 			break;
+		case R.id.menu_delete:
+			datasource.deleteObjects();
+			createData();
 		default:
 			
 			break;
@@ -114,7 +117,6 @@ public class MainActivity extends ListActivity {
 	
 	}
 	
-	//
 	//open the database when the activity comes to the screen.
 	@Override
 	protected void onResume() {
@@ -128,17 +130,46 @@ public class MainActivity extends ListActivity {
 		datasource.close();
 	}
 
+	@SuppressWarnings("unchecked")
 	private void createData(){
-		//read the xml source and return the objects, 
-		StocksPullParser parser = new StocksPullParser();
-		List<Stock> stocks = parser.parseXML(this);
-		//loop through and create an object 
-		for(Stock stock : stocks){
-			datasource.create(stock);
-		}
-		
-	}
-	
-	
+		@SuppressWarnings("rawtypes")
+		ParseQuery query = new ParseQuery("StockObject");
+		query.findInBackground(new FindCallback<ParseObject>() {
 
+			@Override
+			public void done(List<ParseObject> objects, ParseException e) {
+				if(e == null){
+					int s = objects.size();
+					for (int i = 0; i < s; i++){
+						String name = (String) objects.get(i).get("name");
+						String symbol = (String) objects.get(i).get("symbol");
+						int price = (Integer) objects.get(i).get("lastPrice");
+						int change = (Integer) objects.get(i).get("change");
+						int volume = (Integer) objects.get(i).get("volume");
+						
+						Stock stock = new Stock();
+						stock.setName(name);
+						stock.setSymbol(symbol);
+						stock.setLastPrice(price);
+						stock.setChange(change);
+						stock.setVolume(volume);
+						
+					}
+					}else{
+						String error = e.toString();
+					}
+					
+				
+			}
+		
+		//read the xml source and return the objects, 
+		//StocksPullParser parser = new StocksPullParser();
+		//List<Stock> stocks = parser.parseXML(this);
+		//loop through and create an object 
+		//for(Stock stock : stocks){
+			//datasource.create(stock);
+		
+	
+		});
+	}
 }

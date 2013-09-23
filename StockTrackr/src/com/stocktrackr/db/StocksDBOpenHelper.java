@@ -23,7 +23,7 @@ public class StocksDBOpenHelper extends SQLiteOpenHelper {
 	public static final String COLUMN_VOLUME = "volume";
 
 	//Create the stocks table (setting the column names and their data type)
-	private static final String TABLE_CREATE = 
+	public static final String TABLE_CREATE = 
 	"CREATE TABLE " + TABLE_STOCKS + " (" +
 	COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
 	COLUMN_NAME + " TEXT, " + 

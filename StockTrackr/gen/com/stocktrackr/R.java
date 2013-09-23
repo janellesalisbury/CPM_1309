@@ -19,6 +19,7 @@ public final class R {
         public static final int change_et=0x7f080009;
         public static final int label=0x7f080001;
         public static final int menu_all=0x7f08000f;
+        public static final int menu_delete=0x7f080013;
         public static final int menu_less=0x7f080010;
         public static final int menu_more=0x7f080011;
         public static final int menu_settings=0x7f08000e;
@@ -49,6 +50,7 @@ public final class R {
         public static final int hello_world=0x7f050001;
         public static final int menu_add=0x7f050006;
         public static final int menu_all=0x7f050003;
+        public static final int menu_delete=0x7f050007;
         public static final int menu_less=0x7f050005;
         public static final int menu_more=0x7f050004;
         public static final int menu_settings=0x7f050002;
